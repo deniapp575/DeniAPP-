@@ -1,58 +1,114 @@
-container.innerHTML = '';
-        data.forEach(ev => {
-            const card = `
-                <div class="event-card">
-                    <div class="event-img">${ev.emoji}</div>
-                    <div class="event-info">
-                        <div class="event-date">${ev.date}</div>
-                        <h3>${currentLang === 'es' ? ev.title_es : ev.title_en}</h3>
-                        <p>${currentLang === 'es' ? ev.desc_es : ev.desc_en}</p>
-                    </div>
-                </div>
-            `;
-            container.innerHTML += card;
-        });
-    }
-}
-        // Initial render
-    renderEvents();
-  </script>
-<button id="installBtn" style="display:none; margin: 20px; padding: 10px; background: #007bff; color: white; border: none; border-radius: 5px;">
-  Install App
-</button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Denia App 575</title>
+  <link rel="manifest" href="/manifest.json">
+  <style>
+    body {
+      font-family: -apple-system, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f0f2f5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .container {
+      width: 100%;
+      max-width: 400px;
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h2 { color: #333; margin-top: 0; }
+    .input-group { display: flex; gap: 10px; margin-bottom: 20px; }
+    input { flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 8px; }
+    button { padding: 10px 15px; border: none; border-radius: 8px; cursor: pointer; }
+    .add-btn { background: #007bff; color: white; }
+    .install-btn { background: #28a745; color: white; width: 100%; margin-bottom: 15px; display: none; }
+    ul { list-style: none; padding: 0; }
+    li { 
+      background: #fff; border-bottom: 1px solid #eee; 
+      padding: 12px; display: flex; justify-content: space-between; align-items: center; 
+    }
+    .delete-btn { background: #ff4d4d; color: white; font-size: 12px; }
+  </style>
+</head>
+<body>
 
-<script>
-  let deferredPrompt;
-  const installBtn = document.getElementById('installBtn');
+  <div class="container">
+    <button id="installBtn" class="install-btn">Install App</button>
+    
+    <h2>My Tasks</h2>
+    <div class="input-group">
+      <input type="text" id="taskInput" placeholder="New task...">
+      <button class="add-btn" onclick="addTask()">Add</button>
+    </div>
+    
+    <ul id="taskList"></ul>
+  </div>
 
-  window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-    installBtn.style.display = 'block'; // Only show the button if the app CAN be installed
-  });
+  <script>
+    // --- 1. Task List Logic ---
+    let tasks = JSON.parse(localStorage.getItem('myTasks')) || [];
 
-  installBtn.addEventListener('click', () => {
-    installBtn.style.display = 'none';
-    deferredPrompt.prompt();
-  });
-</script>
-<script>
+    function renderTasks() {
+      const list = document.getElementById('taskList');
+      list.innerHTML = '';
+      tasks.forEach((task, index) => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <span>${task}</span>
+          <button class="delete-btn" onclick="deleteTask(${index})">Done</button>
+        `;
+        list.appendChild(li);
+      });
+    }
+
+    function addTask() {
+      const input = document.getElementById('taskInput');
+      if (input.value.trim() !== '') {
+        tasks.push(input.value);
+        localStorage.setItem('myTasks', JSON.stringify(tasks));
+        input.value = '';
+        renderTasks();
+      }
+    }
+
+    function deleteTask(index) {
+      tasks.splice(index, 1);
+      localStorage.setItem('myTasks', JSON.stringify(tasks));
+      renderTasks();
+    }
+
+    renderTasks();
+
+    // --- 2. Install Button Logic ---
+    let deferredPrompt;
+    const installBtn = document.getElementById('installBtn');
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      installBtn.style.display = 'block';
+    });
+
+    installBtn.addEventListener('click', () => {
+      installBtn.style.display = 'none';
+      deferredPrompt.prompt();
+    });
+
+    // --- 3. Service Worker Registration ---
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('/sw.js')
-          .then(reg => console.log('Service Worker registered!'))
-          .catch(err => console.error('Registration failed:', err));
+          .then(reg => console.log('SW Registered'))
+          .catch(err => console.log('SW Error', err));
       });
     }
   </script>
-<div class="container">
-  <h2>My Tasks</h2>
-  <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-    <input type="text" id="taskInput" placeholder="What needs to be done?" style="flex: 1; padding: 10px; border-radius: 5px; border: 1px solid #ccc;">
-    <button onclick="addTask()" style="width: auto; padding: 10px 20px;">Add</button>
-  </div>
-  <ul id="taskList" style="list-style: none; padding: 0;"></ul>
-</div>
 </body>
 </html>
-
