@@ -1,20 +1,21 @@
 const CACHE_NAME = 'denia-app-v1';
-const ASSETS_TO_CACHE = [
+const ASSETS = [
   '/',
   '/index.html',
   '/manifest.json'
 ];
 
-// This part saves your files to the phone/browser
+// Install and Cache files
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(ASSETS_TO_CACHE);
+      console.log('Caching files for offline use');
+      return cache.addAll(ASSETS);
     })
   );
 });
 
-// This part serves the files if you lose internet
+// Serve files from Cache when offline
 self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request).then((response) => {
