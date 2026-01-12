@@ -1,21 +1,16 @@
 {
-  "short_name": "DeniaApp",
-  "name": "Denia App 575",
+  "name": "DeniAPP- Events",
+  "short_name": "DeniAPP",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#AA151B",
+  "theme_color": "#AA151B",
   "icons": [
     {
-      "src": "icon-192.png",
+      "src": "icon.png",
+      "sizes": "512x512",
       "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "icon-512.png",
-      "type": "image/png",
-      "sizes": "512x512"
+      "purpose": "any maskable"
     }
-  ],
-  "start_url": "/",
-  "background_color": "#ffffff",
-  "display": "standalone",
-  "scope": "/",
-  "theme_color": "#007bff"
+  ]
 }
