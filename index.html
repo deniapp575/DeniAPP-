@@ -1,83 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DeniAPP- Events</title>
-  <link rel="manifest" href="/manifest.json">
+  <title>DeniAPP - Eventos de Denia</title>
+  <link rel="manifest" href="manifest.json">
   <style>
-    body { font-family: -apple-system, sans-serif; margin: 0; padding: 0; background-color: #f4f7f6; color: #333; }
-    header { background: #007bff; color: white; padding: 25px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    :root { --es-red: #AA151B; --es-yellow: #F1BF00; }
+    body { font-family: -apple-system, sans-serif; margin: 0; padding: 0; background-color: #fcf8e8; color: #333; }
+    header { background: var(--es-red); color: white; padding: 25px; text-align: center; border-bottom: 8px solid var(--es-yellow); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
     .container { padding: 20px; max-width: 500px; margin: 0 auto; }
-    .section-title { font-size: 1.1rem; color: #666; margin: 25px 0 10px 0; text-transform: uppercase; font-weight: bold; }
+    .section-title { font-size: 1.2rem; color: var(--es-red); margin: 25px 0 10px 0; text-transform: uppercase; font-weight: bold; border-bottom: 2px solid var(--es-yellow); display: inline-block; }
     .install-btn { background: #28a745; color: white; width: 100%; padding: 15px; border: none; border-radius: 8px; font-weight: bold; margin-bottom: 20px; display: none; }
-    .event-card { background: white; border-radius: 12px; padding: 15px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border-left: 5px solid #007bff; }
-    .tag { display: inline-block; background: #e9ecef; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; text-transform: uppercase; margin-bottom: 8px; }
+    .event-card { background: white; border-radius: 12px; padding: 15px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 6px solid var(--es-red); }
+    .tag { display: inline-block; background: var(--es-yellow); color: #333; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; text-transform: uppercase; margin-bottom: 8px; }
+    .map-link { color: #007bff; text-decoration: none; font-weight: bold; font-size: 14px; display: inline-block; margin-top: 5px; }
     .share-btn { background: #25D366; color: white; padding: 15px; border-radius: 50px; text-decoration: none; font-weight: bold; display: flex; justify-content: center; align-items: center; margin: 30px 0; }
-    form { background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-    input, textarea { width: 100%; padding: 10px; margin: 8px 0 15px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
-    .submit-btn { background: #007bff; color: white; border: none; padding: 12px; border-radius: 8px; width: 100%; font-weight: bold; }
+    form { background: #fff; padding: 20px; border-radius: 12px; border: 2px solid var(--es-yellow); }
+    input, textarea { width: 100%; padding: 12px; margin: 8px 0 15px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
+    .submit-btn { background: var(--es-red); color: white; border: none; padding: 14px; border-radius: 8px; width: 100%; font-weight: bold; cursor: pointer; }
   </style>
 </head>
 <body>
-
-  <header>
-    <h1>DeniAPP-</h1>
-    <p>Qué pasa en Denia</p>
-  </header>
-
+  <header><h1>DeniAPP-</h1><p>¡Viva Denia! Eventos y Fiestas</p></header>
   <div class="container">
-    <button id="installBtn" class="install-btn">📲 Install Denia App</button>
-
+    <button id="installBtn" class="install-btn">📲 Instalar Denia App</button>
     <h2 class="section-title">📅 Esta Semana</h2>
     <div class="event-card">
-      <span class="tag" style="background:#ffcc00;">Mercadillo</span>
+      <span class="tag">Mercadillo</span>
       <h3>🛍️ Rastro de Denia</h3>
-      <p>📅 Viernes: 08:00 - 13:30</p>
-      <p>📍 Torrecremada</p>
+      <p>📅 Viernes: 08:00 - 13:30 | 📍 Torrecremada</p>
+      <a href="https://www.google.com/maps?q=Torrecremada+Denia" target="_blank" class="map-link">📍 Ver en Mapa</a>
     </div>
-
-    <h2 class="section-title">🚀 Próximamente</h2>
-    <div class="event-card">
-      <span class="tag" style="background:#ff4d4d; color:white;">Fiesta</span>
-      <h3>🔥 Fallas de Denia</h3>
-      <p>📅 Marzo 16 - 19</p>
-      <p>📍 Centro Ciudad</p>
-    </div>
-
-    <a href="whatsapp://send?text=Check out the local events in Denia! https://deniapp575.github.io/DeniAPP-/" class="share-btn">
-      🟢 Compartir por WhatsApp
-    </a>
-
-    <hr style="border:0; border-top:1px solid #ccc; margin: 40px 0;">
-
-    <h2>📢 Enviar un Evento</h2>
+    <a href="whatsapp://send?text=Mira los eventos en Denia! https://deniapp575.github.io/DeniAPP-/" class="share-btn">🟢 Compartir por WhatsApp</a>
     <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-      <label>Evento:</label>
+      <h3>📢 Enviar un Evento</h3>
       <input type="text" name="event" placeholder="Nombre del evento" required>
-      <label>Fecha:</label>
-      <input type="text" name="date" placeholder="Ej: Sábado 20:00" required>
-      <label>Detalles:</label>
-      <textarea name="details" placeholder="Descripción corta..."></textarea>
+      <input type="text" name="date" placeholder="Fecha y Lugar" required>
+      <textarea name="details" placeholder="Cuéntanos más..."></textarea>
       <button type="submit" class="submit-btn">Enviar a DeniAPP</button>
     </form>
   </div>
-
   <script>
     let deferredPrompt;
-    const installBtn = document.getElementById('installBtn');
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-      installBtn.style.display = 'block';
-    });
-    installBtn.addEventListener('click', () => {
-      installBtn.style.display = 'none';
-      deferredPrompt.prompt();
-    });
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
-          .then(reg => console.log('SW Registered'))
-          .catch(err => console.log
-                 
+    window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); deferredPrompt = e; document.getElementById('installBtn').style.display = 'block'; });
+    document.getElementById('installBtn').addEventListener('click', () => { deferredPrompt.prompt(); });
+    if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }
+  </script>
+</body>
+</html>
