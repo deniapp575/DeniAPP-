@@ -1,0 +1,22 @@
+container.innerHTML = '';
+        data.forEach(ev => {
+            const card = `
+                <div class="event-card">
+                    <div class="event-img">${ev.emoji}</div>
+                    <div class="event-info">
+                        <div class="event-date">${ev.date}</div>
+                        <h3>${currentLang === 'es' ? ev.title_es : ev.title_en}</h3>
+                        <p>${currentLang === 'es' ? ev.desc_es : ev.desc_en}</p>
+                    </div>
+                </div>
+            `;
+            container.innerHTML += card;
+        });
+    }
+
+    // Initial render
+    renderEvents();
+</script>
+
+</body>
+</html>
