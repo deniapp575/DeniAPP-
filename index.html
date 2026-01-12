@@ -50,7 +50,13 @@ DOCTYPE html>
     
     <ul id="taskList"></ul>
   </div>
-
+      <div style="text-align: center; margin-top: 30px; padding: 20px; border-top: 1px solid #ddd;">
+      <p>¿Conoces algún evento en Denia?</p>
+      <a href="mailto:YOUR-EMAIL@gmail.com?subject=Nuevo Evento para DeniAPP" 
+         style="display: inline-block; background: #007bff; color: white; padding: 12px 20px; text-decoration: none; border-radius: 8px; font-weight: bold;">
+         📩 Enviar Evento
+      </a>
+      </div>
   <script>
     // --- 1. Task List Logic ---
     let tasks = JSON.parse(localStorage.getItem('myTasks')) || [];
