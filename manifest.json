@@ -1,0 +1,11 @@
+{
+  "short_name": "TownEvents",
+  "name": "Town Events Spain",
+  "start_url": "index.html",
+  "display": "standalone",
+  "theme_color": "#e63946",
+  "background_color": "#f1faee",
+  "icons": [
+    { "src": "https://via.placeholder.com/192", "type": "image/png", "sizes": "192x192" }
+  ]
+}
