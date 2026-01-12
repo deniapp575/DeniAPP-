@@ -17,8 +17,26 @@ container.innerHTML = '';
         // Initial render
     renderEvents();
   </script>
+<button id="installBtn" style="display:none; margin: 20px; padding: 10px; background: #007bff; color: white; border: none; border-radius: 5px;">
+  Install App
+</button>
 
-  <script>
+<script>
+  let deferredPrompt;
+  const installBtn = document.getElementById('installBtn');
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    installBtn.style.display = 'block'; // Only show the button if the app CAN be installed
+  });
+
+  installBtn.addEventListener('click', () => {
+    installBtn.style.display = 'none';
+    deferredPrompt.prompt();
+  });
+</script>
+<script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('/sw.js')
